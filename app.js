@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSnake = [2, 1, 0];
   let direction = 1;
   let score = 0;
-  let speed = 1.03;
+  let speed = 1.02;
   let intervalTime = 0;
   let interval = 0;
   let paused;
@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const controlSnake = (e) => {
     e.preventDefault();
-    squares[currentIndex].classList.remove("snake");
     switch (e.keyCode) {
       case 39:
         direction = 1;
@@ -106,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       case 32:
         paused = !paused;
-
         break;
       default:
         direction = direction;
