@@ -17,16 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let interval = 0;
   let paused;
 
-  function resetElement(e) {
-    var $e = $(e);
-    var $original = $e.clone();
-    $e.replaceWith($original);
-  }
-
   const startGame = () => {
-    resetElement(startBtn);
-    startBtn = document.querySelector(".start");
-    startBtn.addEventListener("click", startGame);
     body.style.cursor = "none";
     startBtn.style.cursor = "none";
     while (grid.firstChild && grid.removeChild(grid.firstChild));
@@ -99,20 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (e.keyCode) {
       case 39:
         direction = 1;
+        paused && (paused = !paused);
         break;
       case 38:
         direction = -width;
+        paused && (paused = !paused);
         break;
       case 37:
         direction = -1;
+        paused && (paused = !paused);
         break;
       case 40:
         direction = +width;
+        paused && (paused = !paused);
         break;
       case 32:
-        {
-          paused = !paused;
-        }
+        paused = !paused;
 
         break;
       default:
@@ -130,5 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
       startBtn.style.cursor = "none";
     }, 1000);
   });
-  startBtn.addEventListener("click", startGame);
+  startBtn.addEventListener("click", () => {
+    startBtn.blur();
+    startGame();
+  });
 });
