@@ -40,9 +40,4 @@ body {
 
 .start {
   outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.start:active {
-  background-color: transparent !important;
 }

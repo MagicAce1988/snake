@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.querySelector(".body");
   const grid = document.querySelector(".grid");
   const scoreDisplay = document.querySelector("span");
-  const startBtn = document.querySelector(".start");
+  let startBtn = document.querySelector(".start");
   let squares;
   let timeouts = null;
 
@@ -17,7 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let interval = 0;
   let paused;
 
+  function resetElement(e) {
+    var $e = $(e);
+    var $original = $e.clone();
+    $e.replaceWith($original);
+  }
+
   const startGame = () => {
+    resetElement(startBtn);
+    startBtn = document.querySelector(".start");
+    startBtn.addEventListener("click", startGame);
     body.style.cursor = "none";
     startBtn.style.cursor = "none";
     while (grid.firstChild && grid.removeChild(grid.firstChild));
