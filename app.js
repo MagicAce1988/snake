@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".grid");
   const scoreDisplay = document.querySelector("span");
   let startBtn = document.querySelector(".start");
+  let snakeHead = "snakeHeadRight";
+  let temporarySnakeHead = "snakeHeadRight";
   let squares;
   let timeouts = null;
 
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let direction = 1;
   let score = 0;
   let speed = 1.02;
-  let intervalTime = 0;
+  let intervalTime = 200;
   let interval = 0;
   let paused;
 
@@ -36,8 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     intervalTime = 200;
     currentSnake = [2, 1, 0];
     currentIndex = 0;
+    snakeHead = "snakeHeadRight";
     paused = false;
-    currentSnake.forEach((el) => squares[el].classList.add("snake"));
+    currentSnake.forEach((el, index) =>
+      index === 0
+        ? squares[el].classList.add(snakeHead)
+        : squares[el].classList.add("snake")
+    );
     interval = setInterval(moveOutcomes, intervalTime);
   };
 
@@ -72,7 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
           currentSnake.length % 10 === 0 ? intervalTime * speed : intervalTime;
         interval = setInterval(moveOutcomes, intervalTime);
       }
-      squares[currentSnake[0]].classList.add("snake");
+      squares[currentSnake[1]].classList.remove(temporarySnakeHead);
+      temporarySnakeHead = snakeHead;
+      squares[currentSnake[1]].classList.add("snake");
+      squares[currentSnake[0]].classList.add(snakeHead);
     }
   };
 
@@ -85,22 +95,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const controlSnake = (e) => {
+    temporarySnakeHead = squares[currentSnake[0]].classList[0];
     e.preventDefault();
     switch (e.keyCode) {
       case 39:
         direction = 1;
+        snakeHead = "snakeHeadRight";
         paused && (paused = !paused);
         break;
       case 38:
         direction = -width;
+        snakeHead = "snakeHeadUp";
         paused && (paused = !paused);
         break;
       case 37:
         direction = -1;
+        snakeHead = "snakeHeadLeft";
         paused && (paused = !paused);
         break;
       case 40:
         direction = +width;
+        snakeHead = "snakeHeadDown";
         paused && (paused = !paused);
         break;
       case 32:
