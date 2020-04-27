@@ -31,40 +31,68 @@ body {
 }
 
 .snake {
-  background-color: blue;
+  background-image: url("images/snakesprite.png");
+  background-repeat: no-repeat;
+  background-size: 300% 315%;
+  background-position: 100% 99%;
 }
 
 .apple {
   background-image: url("images/apple.png");
-  background-size: contain;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
-.snakeHeadDown {
-  background-image: url("images/snake.png");
-  background-size: contain;
+.snakeHead {
+  background-image: url("images/snakesprite.png");
   background-repeat: no-repeat;
+  background-size: 300% 315%;
+  background-position: 0% 1%;
 }
 
-.snakeHeadRight {
-  background-image: url("images/snake.png");
-  background-size: contain;
+.snakeCorner {
+  background-image: url("images/snakesprite.png");
   background-repeat: no-repeat;
+  background-size: 300% 315%;
+  background-position: 49% 1%;
+}
+
+.snakeTail {
+  background-image: url("images/snakesprite2.png");
+  background-repeat: no-repeat;
+  background-size: 300% 315%;
+  background-position: 49% 1%;
+}
+
+.down {
+  transform: rotate(0deg);
+}
+
+.right {
   transform: rotate(270deg);
 }
 
-.snakeHeadUp {
-  background-image: url("images/snake.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+.up {
   transform: rotate(180deg);
 }
 
-.snakeHeadLeft {
-  background-image: url("images/snake.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+.left {
   transform: rotate(90deg);
+}
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+.flipSide {
+  transform: scaleX(-1) rotate(180deg);
+}
+
+.mirrorFlipSide {
+  -moz-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 
 .start {
