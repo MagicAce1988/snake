@@ -1,103 +1,97 @@
 body {
-  overflow: hidden;
-}
-
-.body {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .grid {
-  width: 600px;
-  height: 600px;
   display: flex;
-  flex-wrap: wrap;
-  border-style: solid;
+  flex-direction: column;
+  border: solid 2px;
 }
 
-.grid div {
-  width: 30px;
-  height: 30px;
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
-.snake {
-  background-image: url("images/snakesprite.png");
-  background-repeat: no-repeat;
-  background-size: 300% 315%;
-  background-position: 100% 99%;
+.cell {
+  width: 15px;
+  height: 15px;
 }
 
 .apple {
-  background-image: url("images/apple.png");
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-image: url(./apple.png);
+  background-size: 100% 100%;
 }
 
-.snakeHead {
-  background-image: url("images/snakesprite.png");
-  background-repeat: no-repeat;
-  background-size: 300% 315%;
-  background-position: 0% 1%;
+.snake {
+  background-image: url(./snake.png);
+  background-size: 300% 320%;
 }
 
-.snakeCorner {
-  background-image: url("images/snakesprite.png");
-  background-repeat: no-repeat;
-  background-size: 300% 315%;
-  background-position: 49% 1%;
+.snake.head {
+  animation: tongue 0.1s infinite step-end;
 }
 
-.snakeTail {
-  background-image: url("images/snakesprite2.png");
-  background-repeat: no-repeat;
-  background-size: 300% 315%;
-  background-position: 50% 1%;
+.snake.top{
+  background-position: 100% 98%;
+  transform: rotateZ(180deg);
+}
+.snake.bottom {
+  background-position: 100% 98%;
 }
 
-.down {
-  transform: rotate(0deg);
+.snake.left {
+  background-position: 100% 99%;
+  transform: rotateZ(90deg);
+}
+.snake.right {
+  background-position: 100% 99%;
+  transform: rotateZ(-90deg);
 }
 
-.right {
-  transform: rotate(270deg);
+.snake.bottom-right, .snake.left-top {
+  background-size: 304% 309%;
+  background-position: 50% 50%;
 }
 
-.up {
-  transform: rotate(180deg);
+.snake.bottom-left, .snake.right-top {
+  background-size: 304% 309%;
+  background-position: 100% 50%;
 }
 
-.left {
-  transform: rotate(90deg);
+.snake.top-right, .snake.left-bottom {
+  background-size: 304% 309%;
+  background-position: 50% 0%;
 }
 
-.mirror {
-  transform: scaleX(-1);
+.snake.top-left , .snake.right-bottom {
+  background-size: 304% 309%;
+  background-position: 100% 0%;
 }
 
-.flipSide {
-  transform: scaleX(-1) rotate(180deg);
+.snake.tail{
+  background-size: 300% 320%;
+  background-position: 50% 98%;
+}
+.snake.tail.bottom, .snake.tail.right-bottom, .snake.tail.left-bottom {
+  transform: rotateZ(180deg);
+}
+.snake.tail.top, .snake.tail.right-top, .snake.tail.left-top {
+  transform: rotateZ(0deg);
+}
+.snake.tail.left, .snake.tail.top-left, .snake.tail.bottom-left {
+  transform: rotateZ(-90deg);
+}
+.snake.tail.right, .snake.tail.top-right, .snake.tail.bottom-right {
+  transform: rotateZ(90deg);
 }
 
-.mirrorFlipSide {
-  -moz-transform: scale(-1, -1);
-  -o-transform: scale(-1, -1);
-  -webkit-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-}
-
-.start {
-  height: 30px;
-  width: 150px;
-  margin-top: 10px;
-  outline: none;
+@keyframes tongue {
+  0% { background-position: 0% 0%; }
+  33% { background-position: 0% 50%; }
+  66% { background-position: 0% 100%; }
 }
