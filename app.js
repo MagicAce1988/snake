@@ -1,4 +1,4 @@
-const girdSize = 30;
+const gridSize = 30;
 const grid = [];
 const startSize = 4;
 const dirNames = {
@@ -34,13 +34,13 @@ const computeNext = () => {
 
   //game over bitch wall
   if (
-    newPart[0] == girdSize ||
-    newPart[1] == girdSize ||
+    newPart[0] == gridSize ||
+    newPart[1] == gridSize ||
     newPart[0] == -1 ||
     newPart[1] == -1 ||
     nextHead.classList.contains("snake")
   ) {
-    document.querySelector(".title").textContent = "Game over bitch";
+    document.querySelector(".title").textContent = "Game Over";
     return clearInterval(interval);
   } else if (!nextHead.classList.contains("apple")) {
     let first = snake.shift();
@@ -67,8 +67,8 @@ const startGame = () => {
 
 addNextApple = () => {
   let cell =
-    grid[Math.floor(Math.random() * girdSize)][
-      Math.floor(Math.random() * girdSize)
+    grid[Math.floor(Math.random() * gridSize)][
+      Math.floor(Math.random() * gridSize)
     ];
   if (cell.classList.length > 1) addNextApple();
   else cell.classList.add("apple");
@@ -87,13 +87,13 @@ const createWorld = () => {
   const content = document.querySelector(".grid");
   while (content.lastChild) content.removeChild(content.lastChild);
 
-  for (let y = 0; y < girdSize; y++) {
+  for (let y = 0; y < gridSize; y++) {
     const row = document.createElement("div");
     row.className = "row";
     content.appendChild(row);
     grid[y] = new Array();
 
-    for (let x = 0; x < girdSize; x++) {
+    for (let x = 0; x < gridSize; x++) {
       grid[y][x] = document.createElement("div");
       grid[y][x].className = "cell";
       row.append(grid[y][x]);
