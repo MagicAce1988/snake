@@ -80,13 +80,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ) {
         return clearInterval(interval);
       }
-
-      const tail = currentSnake.pop();
       tailDirection = squares[
         currentSnake[currentSnake.length - 2]
       ].classList.contains("snakeCorner")
-        ? tailDirection
+        ? squares[currentSnake[currentSnake.length - 2]].getAttribute(
+            "direction"
+          )
+          ? squares[currentSnake[currentSnake.length - 2]].getAttribute(
+              "direction"
+            )
+          : tailDirection
         : squares[currentSnake[currentSnake.length - 2]].classList.item(1);
+      const tail = currentSnake.pop();
 
       squares[tail].removeAttribute("class");
       currentSnake.unshift(currentSnake[0] + movingDirection);
@@ -95,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //   deals with snake getting the apple
       if (squares[currentSnake[0]].classList.contains("apple")) {
         squares[currentSnake[0]].classList.remove("apple");
-        squares[tail].classList.add("snake");
+        squares[tail].classList.add("snakeTail");
         squares[tail].classList.add(tailDirection);
         currentSnake.push(tail);
         randomApple();
@@ -109,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       squares[currentSnake[1]].removeAttribute("class");
       if (movedDirection) {
         squares[currentSnake[1]].classList.add("snakeCorner");
+        squares[currentSnake[1]].setAttribute("direction", imagesDirection);
         mirror && squares[currentSnake[1]].classList.add("mirror");
         flip && squares[currentSnake[1]].classList.add("flipSide");
         mirrorAndFlip &&
@@ -122,6 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       squares[currentSnake[0]].classList.add("snakeHead", imagesDirection);
       squares[currentSnake[currentSnake.length - 1]].removeAttribute("class");
+      squares[currentSnake[currentSnake.length - 1]].removeAttribute(
+        "direction"
+      );
       squares[currentSnake[currentSnake.length - 1]].classList.add(
         "snakeTail",
         tailDirection
@@ -132,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //generate new apple once apple is eaten
   const randomApple = () => {
     do {
-      appleIndex = Math.floor(Math.random() * 400);
+      appleIndex = Math.floor(Math.random() * 100);
     } while (
       squares[appleIndex].classList.contains("snake") ||
       squares[appleIndex].classList.contains("snakeHead") ||
